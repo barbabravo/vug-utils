@@ -14,6 +14,6 @@
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.16.6",
-    "qbs-components": "git+https://github.com/bluers/vug-template.git"
+    "vug-components": "git+https://github.com/bluers/vug-templates.git"
   }
 }
