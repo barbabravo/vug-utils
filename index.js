@@ -1,4 +1,4 @@
-var components = require('qbs-components');
+var components = require('vug-components');
 var _ = require('lodash');
 
 var utils = {

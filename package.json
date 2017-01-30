@@ -8,12 +8,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@git.2b6.me:qbs/qbs-utils.git"
+    "url": "https://github.com/bluers/vug-utils.git"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.16.6",
-    "qbs-components": "git+ssh://git@git.2b6.me:qbs/qbs-components.git"
+    "qbs-components": "git+https://github.com/bluers/vug-template.git"
   }
 }
