@@ -1,4 +1,3 @@
-var components = require('vug-components');
 var _ = require('lodash');
 
 var utils = {
@@ -15,49 +14,6 @@ var utils = {
   // 加载 CSS
   loadCSS: function(src) {
     document.writeln('<link rel="stylesheet" href="' + src + '" \/>');
-  },
-
-  // 查询地址栏参数
-  queryUrl: function(name) {
-    if (name) {
-      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-      var r = window.location.search.substr(1).match(reg);
-      if (r != null) return decodeURIComponent(r[2]);
-      return null;
-    } else {
-      var param = {};
-      location.search.substr(1).split('&').map(function(aParam) {
-        var tmp = aParam.split('=');
-        param[tmp[0]] = decodeURIComponent(tmp[1]);
-      })
-      return param;
-    }
-  },
-
-  tip: function(options) {
-    return new Promise(function(resolve, reject){
-      resolve = resolve || function() {};
-      reject = reject || function() {};
-      if (typeof options == 'string' || typeof options == 'number') {
-        components.qTip({
-          text: options
-        });
-      } else {
-        components.qTip(options);
-      }
-      setTimeout(function() {
-        resolve();
-      }, options.time || 1000)
-    })
-  },
-
-  alert: function(text, onOk) {
-    onOk = onOk || function() {};
-    return new Promise(function(resolve, reject){
-      resolve = resolve || function() {};
-      reject = reject || function() {};
-      components.qAlert(text, resolve);
-    })
   },
 
   setCookie: function(name, value){
@@ -83,38 +39,20 @@ var utils = {
         document.cookie= name + "="+cval+";expires="+exp.toGMTString(); 
   }, 
 
-  confirm: function(text, onOk, onCancel) {
-    onOk = onOk || function() {};
-    onCancel = onCancel || function() {};
-    components.qConfirm(text, onOk, onCancel);
-  },
-
-
-  encodeUTF8: function(str) {
-    var temp = "",
-      rs = "";
-    for (var i = 0, len = str.length; i < len; i++) {
-      temp = str.charCodeAt(i).toString(16);
-      rs += "\\u" + new Array(5 - temp.length).join("0") + temp;
-    }
-    return rs;
-  },
-
-  decodeUTF8: function(str) {
-    return str.replace(/(\\u)(\w{4}|\w{2})/gi, function($0, $1, $2) {
-      return String.fromCharCode(parseInt($2, 16));
-    });
-  },
-
-
-  openMenu: function(url) {
-    setTimeout(function() {
-      $('#js_user_menu').find('a[href="${url}"]').parents('.panel-collapse').collapse();
-    }, 10);
-  },
-
   getSearch: function(name) {
-    return utils.queryUrl(name);
+    if (name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+      var r = window.location.search.substr(1).match(reg);
+      if (r != null) return decodeURIComponent(r[2]);
+      return null;
+    } else {
+      var param = {};
+      location.search.substr(1).split('&').map(function(aParam) {
+        var tmp = aParam.split('=');
+        param[tmp[0]] = decodeURIComponent(tmp[1]);
+      })
+      return param;
+    }
   },
   getMultiSearch: function(param_name) {
     var url = location.search.replace(/^\?/, ''),
@@ -130,10 +68,6 @@ var utils = {
       })
     }
     return ret;
-  },
-
-  getHashView: function() {
-    return window.location.hash.replace('#', '');
   },
 
   API: {},
