@@ -1,5 +1,4 @@
 var utils = {
-
   setCookie: function(name, value){
     var exp = new Date();
     exp.setTime(exp.getTime + 8*60*60*1000);
